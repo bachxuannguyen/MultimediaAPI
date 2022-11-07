@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\KHMT\Vs\Publish\MultimediaAPI</_PublishTargetUrl>
+    <History>True|2022-10-08T15:13:33.1330862Z;True|2022-10-08T22:12:53.4392080+07:00;True|2022-10-08T21:54:34.7811843+07:00;True|2022-10-08T21:12:56.8300733+07:00;False|2022-10-08T21:12:04.0720306+07:00;False|2022-10-08T21:11:09.1228534+07:00;True|2022-10-08T20:41:41.1841635+07:00;True|2022-10-08T20:40:03.7603137+07:00;True|2022-10-08T20:35:31.4954616+07:00;False|2022-10-08T20:34:48.9768992+07:00;True|2022-10-08T20:21:00.4138834+07:00;</History>
+  </PropertyGroup>
+</Project>

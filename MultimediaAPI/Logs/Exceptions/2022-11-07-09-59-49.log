@@ -1,0 +1,6 @@
+09:59:49: Could not find file 'D:\KHMT\Vs\[6] [API] [Vs2019] [Net Core] [EF] Multimedia\MultimediaAPI\MultimediaAPI\Contents\Media\~\Contents\Media\config.png'.
+System.IO.FileNotFoundException: Could not find file 'D:\KHMT\Vs\[6] [API] [Vs2019] [Net Core] [EF] Multimedia\MultimediaAPI\MultimediaAPI\Contents\Media\~\Contents\Media\config.png'.
+File name: 'D:\KHMT\Vs\[6] [API] [Vs2019] [Net Core] [EF] Multimedia\MultimediaAPI\MultimediaAPI\Contents\Media\~\Contents\Media\config.png'
+   at System.IO.FileInfo.get_Length()
+   at MultimediaAPI.Services.FileInfo.GetFileSize(String fileUrl) in D:\KHMT\Vs\[6] [API] [Vs2019] [Net Core] [EF] Multimedia\MultimediaAPI\MultimediaAPI\Services\FileInfoService.cs:line 57
+
