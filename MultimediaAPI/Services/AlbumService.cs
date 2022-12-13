@@ -1,10 +1,9 @@
-﻿using System;
+﻿using MultimediaAPI.Contexts;
+using MultimediaAPI.Extentions;
+using MultimediaAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using MultimediaAPI.Models;
-using MultimediaAPI.Contexts;
-using MultimediaAPI.Extentions;
 
 namespace MultimediaAPI.Services
 {

@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MultimediaAPI.Controllers
 {
@@ -13,7 +9,7 @@ namespace MultimediaAPI.Controllers
         {
             var exception = HttpContext.Features.Get<IExceptionHandlerFeature>();
             var path = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
-            if (exception == null)
+            if (exception is null)
                 return View();
             else
                 return View(exception.ToString() + "/n" + path.ToString());

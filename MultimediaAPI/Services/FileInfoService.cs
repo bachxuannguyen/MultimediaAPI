@@ -1,7 +1,7 @@
-﻿using System;
+﻿using MultimediaAPI.Extentions;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
-using MultimediaAPI.Extentions;
 
 namespace MultimediaAPI.Services
 {
@@ -37,7 +37,7 @@ namespace MultimediaAPI.Services
                         IFileInfo fileInfo = new FileInfo();
                         return fileInfo.GetFileInfo(fileUrl);
                     }
-            }    
+            }
         }
     }
     public interface IFileInfo

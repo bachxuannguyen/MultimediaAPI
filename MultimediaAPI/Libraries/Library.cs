@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Linq;
 
 namespace MultimediaAPI.Libraries
 {
@@ -75,8 +74,8 @@ namespace MultimediaAPI.Libraries
             else
             {
                 int x = (from extension in LibVariable.mediaExtensions
-                        where extension.Item2.Contains(mediaExtension.ToLower())
-                        select extension.Item1).ToList().FirstOrDefault();
+                         where extension.Item2.Contains(mediaExtension.ToLower())
+                         select extension.Item1).ToList().FirstOrDefault();
                 Debug.WriteLine(x);
                 return x;
             }

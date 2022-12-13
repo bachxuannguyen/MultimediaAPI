@@ -1,8 +1,7 @@
-﻿using System;
-using System.Diagnostics;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MultimediaAPI.Libraries;
+using System;
+using System.Collections.Generic;
 
 namespace MultimediaAPITest
 {
@@ -57,7 +56,11 @@ namespace MultimediaAPITest
             };
             List<string> nameSet = new()
             {
-                "Image", "Video", "Sound", "Animation", String.Empty
+                "Image",
+                "Video",
+                "Sound",
+                "Animation",
+                String.Empty
             };
             for (int i = 0; i < extentionSet.Count; i++)
                 for (int j = 0; j < extentionSet[i].Count; j++)
@@ -76,7 +79,11 @@ namespace MultimediaAPITest
             };
             List<string> nameSet = new()
             {
-                "Ảnh", "Video", "Âm thanh", "Hoạt họa", String.Empty
+                "Ảnh",
+                "Video",
+                "Âm thanh",
+                "Hoạt họa",
+                String.Empty
             };
             for (int i = 0; i < extensionSet.Count; i++)
                 for (int j = 0; j < extensionSet[i].Count; j++)
