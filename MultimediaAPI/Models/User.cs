@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace MultimediaAPI.Models
 {
+    [Table("TableUser", Schema = "dbo")]
     public class User
     {
+        [Key, Column("UserName")]
         public string UserName { get; set; }
+        [Required, Column("Password")]
         public string Password { get; set; }
+        [Column("EmailAddress")]
         public string EmailAddress { get; set; }
-        public DateTime DateOfJoing { get; set; }
-        public bool IsAdmin { get; set; }
+        [Required, Column("IsRoot"), Range(0,1)]
+        public int IsRoot { get; set; }
     }
 }

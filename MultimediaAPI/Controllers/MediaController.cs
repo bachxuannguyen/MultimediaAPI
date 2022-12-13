@@ -29,19 +29,6 @@ namespace MultimediaAPI.Controllers
         {
             return new JsonResult(_mediaService.GetMedia(mediaId));
         }
-        [HttpGet]
-        [Route("{action}/{mediaId}")]
-        [Authorize]
-        public JsonResult GetMediaFileInfo(int mediaId)
-        {
-            var currentUser = HttpContext.User;
-            string isAdmin = "false";
-            if (currentUser.HasClaim(c => c.Type == "isadmin"))
-                isAdmin = currentUser.Claims.FirstOrDefault(c => c.Type == "isadmin").Value.ToLower();
-            if (isAdmin != "true")
-                return new JsonResult("forbidden: login as admin to access this content");
-            return new JsonResult(_mediaService.GetFileInfo(mediaId));
-        }
         [HttpPost]
         [Route("create")]
         public JsonResult CreateMedia(Media media)
@@ -59,6 +46,19 @@ namespace MultimediaAPI.Controllers
         public JsonResult UpdateMedia(Media media)
         {
             return new JsonResult(_mediaService.UpdateMedia(media));
+        }
+        [HttpGet]
+        [Route("{action}/{mediaId}")]
+        [Authorize]
+        public JsonResult GetMediaFileInfo(int mediaId)
+        {
+            var currentUser = HttpContext.User;
+            string isRoot = "0";
+            if (currentUser.HasClaim(c => c.Type == "isroot"))
+                isRoot = currentUser.Claims.FirstOrDefault(c => c.Type == "isroot").Value.ToLower();
+            if (isRoot != "1")
+                return new JsonResult("login as root user to access this content");
+            return new JsonResult(_mediaService.GetFileInfo(mediaId));
         }
     }
 }

@@ -43,6 +43,7 @@ namespace MultimediaAPI
             services.AddScoped<IMediaService, MediaService>();
             services.AddScoped<IAlbumService, AlbumService>();
             services.AddScoped<IRelationService, RelationService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddDbContext<MultimediaContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MultimediaDbConnection")));
             services.AddControllersWithViews().AddNewtonsoftJson(options
@@ -90,7 +91,7 @@ namespace MultimediaAPI
             });
 
             ///
-            StaticFileOptions staticFileOptions = new StaticFileOptions
+            StaticFileOptions staticFileOptions = new()
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "Contents")),
                 RequestPath = "/Contents"

@@ -22,5 +22,7 @@ namespace MultimediaAPI.Models
         public string FileName { get; set; }
         [Column("Datetime"), Required]
         public DateTime DateCreated { get; set; }
+        [NotMapped]
+        public List<int> AlbumId { get; set; }
     }
 }

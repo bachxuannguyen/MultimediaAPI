@@ -11,7 +11,7 @@ namespace MultimediaAPI.Services
     }
     public class FileInfoService : IFileInfoService
     {
-        private MediaBaseService _mediaBaseService;
+        private readonly MediaBaseService _mediaBaseService;
         public FileInfoService(MediaBaseService mediaBaseService)
         {
             _mediaBaseService = mediaBaseService;
@@ -67,8 +67,8 @@ namespace MultimediaAPI.Services
     {
         public override List<string> GetFileInfo(string fileUrl)
         {
-            List<string> fileInfo = new List<string> { base.GetFileSize(fileUrl).ToString() };
-            Bitmap bitmap = new Bitmap(fileUrl);
+            List<string> fileInfo = new() { base.GetFileSize(fileUrl).ToString() };
+            Bitmap bitmap = new(fileUrl);
             fileInfo.Add(bitmap.Width.ToString());
             fileInfo.Add(bitmap.Height.ToString());
             return fileInfo;
@@ -78,7 +78,7 @@ namespace MultimediaAPI.Services
     {
         public override List<string> GetFileInfo(string fileUrl)
         {
-            List<string> fileInfo = new List<string> { base.GetFileSize(fileUrl).ToString() };
+            List<string> fileInfo = new() { base.GetFileSize(fileUrl).ToString() };
             fileInfo.Add("video specific info");
             return fileInfo;
         }

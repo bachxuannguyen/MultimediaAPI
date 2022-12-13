@@ -18,5 +18,7 @@ namespace MultimediaAPI.Models
         public string Description { get; set; }
         [Column("Datetime"), Required]
         public DateTime DateCreated { get; set; }
+        [NotMapped]
+        public List<int> MediaId { get; set; }
     }
 }

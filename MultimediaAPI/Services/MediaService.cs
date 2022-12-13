@@ -11,7 +11,6 @@ namespace MultimediaAPI.Services
     public interface IMediaService
     {
         bool CreateMedia(Media media);
-        bool CreateMedia(Media media, List<int> albumId);
         Media GetMedia(int mediaId);
         bool UpdateMedia(Media media);
         bool DeleteMedia(int mediaId);
@@ -35,28 +34,17 @@ namespace MultimediaAPI.Services
             {
                 _dbContext.MediaSet.Add(media);
                 _dbContext.SaveChanges();
-                return true;
-            }
-            catch (Exception e)
-            {
-                e.Log();
-                return false;
-            }
-        }
-        public bool CreateMedia(Media media, List<int> albumId)
-        {
-            try
-            {
-                _dbContext.MediaSet.Add(media);
-                foreach (int i in albumId)
+                if (media.AlbumId is not null && media.AlbumId.Count > 0)
                 {
-                    _relationService.CreateRelation(new Relationship
+                    foreach (int i in media.AlbumId)
                     {
-                        MediaId = media.Id,
-                        AlbumId = i
-                    });
+                        _relationService.CreateRelation(new Relationship
+                        {
+                            MediaId = media.Id,
+                            AlbumId = i
+                        });
+                    }
                 }
-                _dbContext.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -85,6 +73,18 @@ namespace MultimediaAPI.Services
                 Media existingMedia = _dbContext.MediaSet.Find(media.Id);
                 _dbContext.Entry(existingMedia).CurrentValues.SetValues(media);
                 _dbContext.SaveChanges();
+                _relationService.DeleteRelationByMediaId(media.Id);
+                if (media.AlbumId is not null && media.AlbumId.Count > 0)
+                {
+                    foreach (int i in media.AlbumId)
+                    {
+                        _relationService.CreateRelation(new Relationship
+                        {
+                            MediaId = media.Id,
+                            AlbumId = i
+                        });
+                    }
+                }
                 return true;
             }
             catch (Exception e)
@@ -101,6 +101,7 @@ namespace MultimediaAPI.Services
                 _dbContext.MediaSet.Attach(existingMedia);
                 _dbContext.MediaSet.Remove(existingMedia);
                 _dbContext.SaveChanges();
+                _relationService.DeleteRelationByMediaId(mediaId);
                 return true;
             }
             catch (Exception e)

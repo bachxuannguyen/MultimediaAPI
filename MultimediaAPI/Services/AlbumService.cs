@@ -11,7 +11,6 @@ namespace MultimediaAPI.Services
     public interface IAlbumService
     {
         bool CreateAlbum(Album album);
-        bool CreateAlbum(Album adlbum, List<int> mediaId);
         Album GetAlbum(int albumId);
         bool UpdateAlbum(Album album);
         bool DeleteAlbum(int albumId);
@@ -32,28 +31,17 @@ namespace MultimediaAPI.Services
             {
                 _dbContext.AlbumSet.Add(album);
                 _dbContext.SaveChanges();
-                return true;
-            }
-            catch (Exception e)
-            {
-                e.Log();
-                return false;
-            }
-        }
-        public bool CreateAlbum(Album album, List<int> mediaId)
-        {
-            try
-            {
-                _dbContext.AlbumSet.Add(album);
-                foreach (int i in mediaId)
+                if (album.MediaId is not null && album.MediaId.Count > 0)
                 {
-                    _relationService.CreateRelation(new Relationship
+                    foreach (int i in album.MediaId)
                     {
-                        MediaId = i,
-                        AlbumId = album.Id
-                    });
+                        _relationService.CreateRelation(new Relationship
+                        {
+                            MediaId = i,
+                            AlbumId = album.Id
+                        });
+                    }
                 }
-                _dbContext.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -82,6 +70,18 @@ namespace MultimediaAPI.Services
                 Album existingAlbum = _dbContext.AlbumSet.Find(album.Id);
                 _dbContext.Entry(existingAlbum).CurrentValues.SetValues(album);
                 _dbContext.SaveChanges();
+                _relationService.DeleteRelationByAlbumId(album.Id);
+                if (album.MediaId is not null && album.MediaId.Count > 0)
+                {
+                    foreach (int i in album.MediaId)
+                    {
+                        _relationService.CreateRelation(new Relationship
+                        {
+                            MediaId = i,
+                            AlbumId = album.Id
+                        });
+                    }
+                }
                 return true;
             }
             catch (Exception e)
@@ -98,6 +98,7 @@ namespace MultimediaAPI.Services
                 _dbContext.AlbumSet.Attach(existingAlbum);
                 _dbContext.AlbumSet.Remove(existingAlbum);
                 _dbContext.SaveChanges();
+                _relationService.DeleteRelationByAlbumId(albumId);
                 return true;
             }
             catch (Exception e)
